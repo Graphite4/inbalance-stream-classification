@@ -24,7 +24,7 @@ class AWE(BaseEnsemble, ClassifierMixin):
         self.y_ = None
 
     def _prune(self):
-        number_to_prune = self.n_estimators - len(self.ensemble_)
+        number_to_prune = len(self.ensemble_) - self.n_estimators
         for i in range(number_to_prune):
             self.ensemble_.pop(np.argmin(self.weights_))
             self.weights_ = np.delete(self.weights_, np.argmin(self.weights_))
