@@ -94,7 +94,7 @@ if __name__ == '__main__':
                  ensemble10, ensemble11, ensemble12, ensemble13, ensemble14, ensemble15)
     ensemble_labels = [ensembles[i].get_name() for i in range(12)] + ['WAE', 'OOB', 'UOB']
 
-    path = 'wyniki/'
+    path = 'wyniki_dobre_douczanie/'
     for i in imbalance:
         e = Experiment(streams_random_seeds=random_seeds, ensembles=ensembles, ensembles_labels=ensemble_labels,
                        metrics=[f1_score, g_mean, bac], imbalance=[1 - i, i], gradual=False)

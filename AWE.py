@@ -48,13 +48,13 @@ class AWE(BaseEnsemble, ClassifierMixin):
     def _random_mean_squared_error(y):
         return sum([sum(y == u) / len(y) * (1 - (sum(y == u) / len(y)))**2 for u in np.unique(y)])
 
-    def _weight_of_random_classifier(self, y):
+    def _weight_of_random_classifier(self):
         if self._weighting_method == "proportional_to_mse":
-            return 1 / self._random_mean_squared_error(y)
-        P = sum(y == 1)
-        N = sum(y == 0)
-        pP = P / len(y)
-        pN = N / len(y)
+            return 1 / self._random_mean_squared_error(self.y_)
+        P = sum(self.y_ == 1)
+        N = sum(self.y_ == 0)
+        pP = P / len(self.y_)
+        pN = N / len(self.y_)
         TP = P*pP
         TN = N*pN
         FP = N*pP
@@ -159,7 +159,7 @@ class AWE(BaseEnsemble, ClassifierMixin):
         self._set_weights()
 
         if self._update:
-            random_cl_weight = self._weight_of_random_classifier(y)
+            random_cl_weight = self._weight_of_random_classifier()
             for i in range(len(self.ensemble_)):
                 if self.weights_[i] > random_cl_weight:
                     self.ensemble_[i].partial_fit(X,y)
