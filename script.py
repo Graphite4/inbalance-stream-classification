@@ -17,7 +17,7 @@ for fname in fnames:
     results = np.load("wyniki_dobre_douczanie/Stream_%s_imbalance.npy" % fname)
 
     results = np.mean(results, axis=0)
-    kernel = 5
+    kernel = 3
     metrics = ["f1", "gmean", "bac"]
     colors = ["red", "red", "blue", "blue", "green", "red", "blue"]
     ls = ["-", ":", "-", ":", "-", "-", "-"]
