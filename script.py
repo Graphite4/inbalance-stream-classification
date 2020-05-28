@@ -3,10 +3,12 @@ import matplotlib.pyplot as plt
 from scipy.signal import medfilt
 
 fnames = [
+    "sudden_drift_2",
     "sudden_drift_5",
     "sudden_drift_10",
     "sudden_drift_20",
     "sudden_drift_30",
+    "gradual_drift_2",
     "gradual_drift_5",
     "gradual_drift_10",
     "gradual_drift_20",
