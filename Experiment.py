@@ -75,26 +75,28 @@ if __name__ == '__main__':
 
     imbalance = [0.05, 0.10, 0.20, 0.30]
 
-    ensemble1 = AWE(clf, 10, "proportional_to_g-mean", sampling="under")
-    ensemble2 = AWE(clf, 10, "proportional_to_bac", sampling="under")
-    ensemble3 = AWE(clf, 10, "proportional_to_f1", sampling="under")
-    ensemble4 = AWE(clf, 10, "proportional_to_g-mean", sampling="over")
-    ensemble5 = AWE(clf, 10, "proportional_to_bac", sampling="over")
-    ensemble6 = AWE(clf, 10, "proportional_to_f1", sampling="over")
-    ensemble7 = AWE(clf, 10, "proportional_to_g-mean", sampling="under", update=True)
-    ensemble8 = AWE(clf, 10, "proportional_to_bac", sampling="under", update=True)
-    ensemble9 = AWE(clf, 10, "proportional_to_f1", sampling="under", update=True)
-    ensemble10 = AWE(clf, 10, "proportional_to_g-mean", sampling="over", update=True)
-    ensemble11 = AWE(clf, 10, "proportional_to_bac", sampling="over", update=True)
-    ensemble12 = AWE(clf, 10, "proportional_to_f1", sampling="over", update=True)
-    ensemble13 = WAE(clf, 10)
-    ensemble14 = OOB(clf, 10)
-    ensemble15 = UOB(clf, 10)
-    ensembles = (ensemble1, ensemble2, ensemble3, ensemble4, ensemble5, ensemble6, ensemble7, ensemble8, ensemble9,
-                 ensemble10, ensemble11, ensemble12, ensemble13, ensemble14, ensemble15)
-    ensemble_labels = [ensembles[i].get_name() for i in range(12)] + ['WAE', 'OOB', 'UOB']
+    ensemble1 = AWE(clf, 10, "proportional_to_mse")
+    ensemble2 = AWE(clf, 10, "proportional_to_mse", sampling="under")
+    ensemble3 = AWE(clf, 10, "proportional_to_mse", sampling="over")
+    # ensemble4 = AWE(clf, 10, "proportional_to_g-mean", sampling="over")
+    # ensemble5 = AWE(clf, 10, "proportional_to_bac", sampling="over")
+    # ensemble6 = AWE(clf, 10, "proportional_to_f1", sampling="over")
+    ensemble7 = AWE(clf, 10, "proportional_to_mse", update=True)
+    ensemble8 = AWE(clf, 10, "proportional_to_mse", sampling="under", update=True)
+    ensemble9 = AWE(clf, 10, "proportional_to_mse", sampling="over", update=True)
+    # ensemble10 = AWE(clf, 10, "proportional_to_g-mean", sampling="over", update=True)
+    # ensemble11 = AWE(clf, 10, "proportional_to_bac", sampling="over", update=True)
+    # ensemble12 = AWE(clf, 10, "proportional_to_f1", sampling="over", update=True)
+    # ensemble13 = WAE(clf, 10)
+    # ensemble14 = OOB(clf, 10)
+    # ensemble15 = UOB(clf, 10)
+    # ensembles = (ensemble1, ensemble2, ensemble3, ensemble4, ensemble5, ensemble6, ensemble7, ensemble8, ensemble9,
+    #              ensemble10, ensemble11, ensemble12, ensemble13, ensemble14, ensemble15)
+    # ensemble_labels = [ensembles[i].get_name() for i in range(12)] + ['WAE', 'OOB', 'UOB']
+    ensembles = (ensemble1, ensemble2, ensemble3, ensemble7, ensemble8, ensemble9)
+    ensemble_labels = [e.get_name() for e in ensembles]
 
-    path = 'wyniki_dobre_douczanie/'
+    path = 'wyniki_mse_2/'
     for i in imbalance:
         e = Experiment(streams_random_seeds=random_seeds, ensembles=ensembles, ensembles_labels=ensemble_labels,
                        metrics=[f1_score, g_mean, bac], imbalance=[1 - i, i], gradual=False)

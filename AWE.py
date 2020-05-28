@@ -20,7 +20,7 @@ WEIGHT_CALCULATION = (
 
 class AWE(BaseEnsemble, ClassifierMixin):
 
-    def __init__(self, base_estimator=None, n_estimators=10, weighting_method="proportional_to_mse", sampling=None, update=False):
+    def __init__(self, base_estimator=None, n_estimators=10, weighting_method="proportional_to_mse", sampling='', update=False):
 
         self.base_estimator = base_estimator
         self.n_estimators = n_estimators
@@ -180,11 +180,11 @@ class AWE(BaseEnsemble, ClassifierMixin):
         """Wang's weights"""
         if self._weighting_method == "proportional_to_mse" and not self._update:
             mse_rand = self._random_mean_squared_error(self.y_)
-            mse_members = np.array([self._mean_squared_error(self.y_, self.check_proba_array(member_clf.predict_proba(self.X_)))
+            mse_members = np.array([self._mean_squared_error(self.y_, member_clf.predict_proba(self.X_))
                                     for member_clf in self.ensemble_])
             self.weights_ = mse_rand - mse_members
         elif self._weighting_method == "proportional_to_mse" and self._update:
-            self.weights_ = np.array([1 / (self._mean_squared_error(self.y_, self.check_proba_array(member_clf.predict_proba(self.X_))) + 0.001)
+            self.weights_ = np.array([1 / (self._mean_squared_error(self.y_, member_clf.predict_proba(self.X_)) + 0.001)
                                     for member_clf in self.ensemble_])
         elif self._weighting_method == "proportional_to_f1":
             self.weights_ = np.array([f1_score(self.y_, member_clf.predict(self.X_)) for member_clf in self.ensemble_])
