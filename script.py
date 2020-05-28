@@ -21,18 +21,18 @@ for fname in fnames:
     new_results = np.mean(new_results, axis=0)
     kernel = 5
     metrics = ["f1", "gmean", "bac"]
-    colors = ["red", "red", "blue", "blue", "green", "red", "blue", 'darkorange', 'darkorange', 'dodgerblue',
-              'dodgerblue', 'darkorange', 'dodgerblue' ]
-    ls = ["-", ":", "-", ":", "-", "-", "-", "-", ":", "-", ":", "--", "--"]
-    labels = ["AWE RUS", "AWE ROS", "AUE RUS", "AUE ROS", "WAE", "OOB", "UOB", "AWE RUS MSE", "AWE ROS MSE",
-              "AUE RUS MSE", "AUE ROS MSE", "AWE", "AUE"]
+    colors = ["red", "red", "blue", "blue", "green", "red", "blue", 'darkorange', 'darkorange','darkorange', 'dodgerblue',
+              'dodgerblue',  'dodgerblue' ]
+    ls = ["-", ":", "-", ":", "-", "-", "-",   "-", "-", ":", "-", "-",":"]
+    labels = ["AWE RUS", "AWE ROS", "AUE RUS", "AUE ROS", "WAE", "OOB", "UOB", "AWE","AWE RUS MSE", "AWE ROS MSE",
+              "AUE", "AUE RUS MSE", "AUE ROS MSE"]
 
     usages = [
         [0, 3, 6, 9, 12, 13, 14, 15, 16, 17, 18, 19, 20],
         [1, 4, 7, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20],
         [2, 5, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
     ]
-    lw = [2, 2, 2, 2, 0.25, 0.25, 0.25, 1, 1, 1, 1, 0.5, 0.5]
+    lw = [2, 2, 2, 2, 0.25, 0.25, 0.25, 0.5, 2, 2, 0.5, 2, 2]
     locs = [1, 3, 3]
 
     print(new_results.shape)
