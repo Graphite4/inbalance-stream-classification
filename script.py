@@ -20,14 +20,45 @@ for fname in fnames:
     results_mse = np.load("wyniki_mse_2/Stream_%s_imbalance.npy" % fname)
     new_results = np.concatenate((results, results_mse), axis=1)
 
+    # Z tego testy parowe
+    to_compare = np.mean(new_results, axis=2)
+    print(to_compare.shape)
+    # Koniec tego
+
     new_results = np.mean(new_results, axis=0)
     kernel = 5
     metrics = ["f1", "gmean", "bac"]
-    colors = ["red", "red", "blue", "blue", "green", "red", "blue", 'darkorange', 'darkorange','darkorange', 'dodgerblue',
-              'dodgerblue',  'dodgerblue' ]
-    ls = ["-", ":", "-", ":", "-", "-", "-",   "-", "-", ":", "-", "-",":"]
-    labels = ["AWE RUS", "AWE ROS", "AUE RUS", "AUE ROS", "WAE", "OOB", "UOB", "AWE","AWE RUS MSE", "AWE ROS MSE",
-              "AUE", "AUE RUS MSE", "AUE ROS MSE"]
+    colors = [
+        "red",
+        "red",
+        "blue",
+        "blue",
+        "green",
+        "red",
+        "blue",
+        "darkorange",
+        "darkorange",
+        "darkorange",
+        "dodgerblue",
+        "dodgerblue",
+        "dodgerblue",
+    ]
+    ls = ["-", ":", "-", ":", "-", "-", "-", "-", "-", ":", "-", "-", ":"]
+    labels = [
+        "AWE RUS",
+        "AWE ROS",
+        "AUE RUS",
+        "AUE ROS",
+        "WAE",
+        "OOB",
+        "UOB",
+        "AWE",
+        "AWE RUS MSE",
+        "AWE ROS MSE",
+        "AUE",
+        "AUE RUS MSE",
+        "AUE ROS MSE",
+    ]
 
     usages = [
         [0, 3, 6, 9, 12, 13, 14, 15, 16, 17, 18, 19, 20],
